@@ -1,20 +1,7 @@
-import { GetAgentsRes } from "@/api/responses";
-import { deleteRealEstate } from "@/api/services/deleteServices";
-import { getAgents } from "@/api/services/getServices";
-import React, { useEffect, useState } from "react";
+import HomepageContainer from "@/containers/homepage-container/HomepageContainer";
 
 const HomePage = () => {
-  const [data, setData] = useState<GetAgentsRes[]>();
-  const getData = async () => {
-    const res = await getAgents();
-    setData(res);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  return <div>HomePage</div>;
+  return <HomepageContainer />;
 };
 
 export default HomePage;

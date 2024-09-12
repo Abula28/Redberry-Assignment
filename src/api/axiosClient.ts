@@ -11,8 +11,7 @@ export const getAxiosClient = (
     ...axiosConfig,
   });
 
-  const token = import.meta.env.VITE_APP_API_TOKEN;
-  if (!token) return axiosClient;
+  const token = "9cfc4a2c-50a6-44b4-8e02-03e4136cb1d3";
 
   axiosClient.interceptors.request.use((req) => {
     if (req && req.headers) {
