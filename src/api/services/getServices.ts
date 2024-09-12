@@ -1,10 +1,52 @@
 import { getAxiosClient } from "../axiosClient";
-import { agentsEnpoint } from "../endpoints";
-import { GetAgentsRes } from "../responses";
+import {
+  agentsEnpoint,
+  citiesEndpoint,
+  realEstatesEndpoint,
+  regionsEndpoint,
+} from "../endpoints";
+import {
+  GetAgentsRes,
+  GetCitiesRes,
+  GetRealEstatesRes,
+  GetRegionsRes,
+} from "../responses";
 
-export const getAgents = async (): Promise<GetAgentsRes> => {
+// ========== Agents ========== //
+export const getAgents = async (): Promise<GetAgentsRes[]> => {
   const response = await getAxiosClient().get(agentsEnpoint());
-  const data = await response.data;
+  const result = await response.data;
 
-  return data;
+  return result;
+};
+
+// ========== Real Estates ========== //
+export const getRealEstates = async (): Promise<GetRealEstatesRes[]> => {
+  const response = await getAxiosClient().get(realEstatesEndpoint());
+  const result = await response.data;
+
+  return result;
+};
+
+export const getRealEstateById = async (id: number): Promise<GetAgentsRes> => {
+  const response = await getAxiosClient().get(realEstatesEndpoint(id));
+  const result = await response.data;
+
+  return result;
+};
+
+// ========== Cities ========== //
+export const getCities = async (): Promise<GetCitiesRes[]> => {
+  const response = await getAxiosClient().get(citiesEndpoint());
+  const result = await response.data;
+
+  return result;
+};
+
+// ========== Regions ========== //
+export const getRegions = async (): Promise<GetRegionsRes[]> => {
+  const response = await getAxiosClient().get(regionsEndpoint());
+  const result = await response.data;
+
+  return result;
 };
