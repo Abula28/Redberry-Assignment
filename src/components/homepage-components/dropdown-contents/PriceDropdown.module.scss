@@ -1,0 +1,52 @@
+.dropdown {
+  width: 382px;
+  padding: 24px;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
+
+  h2 {
+    font-size: 16px;
+    line-height: 19.2px;
+    font-weight: 500;
+    color: #021526;
+  }
+}
+
+.prices {
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 16.8px;
+  font-weight: 400;
+}
+
+.priceFromTo {
+  font-size: 14px;
+  line-height: 16.8px;
+  font-weight: 500;
+  color: #021526;
+}
+
+.pricesContent {
+  position: relative;
+}
+.errorMessage {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  color: #f93b1d;
+  position: absolute;
+  top: 35px;
+}
+
+.confirmBtn {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #f93b1d;
+  color: #fff;
+  font-size: 14px;
+  line-height: 16.8px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

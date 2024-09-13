@@ -1,8 +1,8 @@
 .dropdown {
-  width: 731px;
-  border: 1px solid #dbdbdb;
-  border-radius: 10px;
+  width: 234px;
   padding: 24px;
+  border-radius: 10px;
+  border: 1px solid #dbdbdb;
 
   h2 {
     font-size: 16px;
@@ -12,19 +12,10 @@
   }
 }
 
-.regionsList {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  row-gap: 16px;
-
-  .checkboxWrapper {
-    cursor: pointer;
-    .text {
-      font-size: 14px;
-      line-height: 16.8px;
-      font-weight: 400;
-    }
-  }
+.inpWidth {
+  width: 41px;
+  height: 42px;
+  text-align: center;
 }
 
 .confirmBtn {
