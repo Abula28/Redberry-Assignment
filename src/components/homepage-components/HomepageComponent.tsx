@@ -4,11 +4,13 @@ import { IoChevronDown, IoChevronUp } from "react-icons/io5";
 import { HompageComponentProps } from "@/types/component-types/homepageComponentProps";
 import RegionsDropdown from "./dropdown-contents/RegionsDropdown";
 import PriceDropdown from "./dropdown-contents/PriceDropdown";
-import FilterTag from "../common/antd-components/FilterTag";
+import { FilterTag } from "../common/antd-components/CustomTags";
 import BedsDropdown from "./dropdown-contents/BedsDropdown";
+import { ButtonPrimary, ButtonSecondary } from "../common/antd-components";
+import { PlusIcon, PlusIconColored } from "@/assets";
+import EstateCard from "./estate-card/EstateCard";
 
 const HomepageComponent: React.FC<HompageComponentProps> = ({
-  estatesData,
   regionsData,
   activeBtn,
   selectedRegions,
@@ -17,6 +19,8 @@ const HomepageComponent: React.FC<HompageComponentProps> = ({
   areaFrom,
   areaTo,
   bedsValue,
+  activeBtnRef,
+  filteredData,
   handleSelectRegion,
   handleActiveDropdown,
   handleRemoveRegion,
@@ -199,43 +203,79 @@ const HomepageComponent: React.FC<HompageComponentProps> = ({
     }
   };
 
+  const dataRenderer = () => {
+    if (filteredData().length === 0)
+      return (
+        <p className={classes.notFound}>
+          აღნიშნული მონაცემებით განცხადება არ იძებნება
+        </p>
+      );
+
+    return filteredData().map((e) => <EstateCard {...e} key={e.id} />);
+  };
+
   return (
-    <Flex vertical gap={32} className={classes.container}>
-      <Flex vertical gap={16}>
-        <Flex justify="space-between" align="center">
-          <Flex
-            justify="space-between"
-            align="center"
-            className={classes.filterDropdowns}
-          >
-            {filterButtons.map(({ name, label }, i) => (
-              <div className={classes.dropdownWrapper} key={i}>
-                <button
-                  className={`${classes.btn} ${
-                    activeBtn === i && classes.active
-                  }`}
-                  onClick={() => handleActiveDropdown(i)}
-                >
-                  <Flex align="center" gap={4}>
-                    {name}{" "}
-                    {activeBtn === i ? <IoChevronUp /> : <IoChevronDown />}
-                  </Flex>
-                </button>
-                {activeBtn === i && (
-                  <div className={classes.dropdownContent}>{label}</div>
-                )}
-              </div>
-            ))}
+    <Flex vertical gap={77} className={classes.container}>
+      <Flex justify="space-between" align="center">
+        <Flex vertical gap={32}>
+          <Flex vertical gap={16}>
+            <Flex justify="space-between" align="center">
+              <Flex
+                justify="space-between"
+                align="center"
+                className={classes.filterDropdowns}
+              >
+                {filterButtons.map(({ name, label }, i) => (
+                  <div className={classes.dropdownWrapper} key={i}>
+                    <button
+                      className={`${classes.btn} ${
+                        activeBtn === i && classes.active
+                      }`}
+                      onClick={() => handleActiveDropdown(i)}
+                      ref={activeBtnRef}
+                    >
+                      <Flex align="center" gap={4}>
+                        {name}{" "}
+                        {activeBtn === i ? <IoChevronUp /> : <IoChevronDown />}
+                      </Flex>
+                    </button>
+                    {activeBtn === i && (
+                      <div className={classes.dropdownContent}>{label}</div>
+                    )}
+                  </div>
+                ))}
+              </Flex>
+            </Flex>
+
+            <Flex align="center" gap={8}>
+              {regionTagRenderer()}
+              {priceTagRenderer()}
+              {areaTagRenderer()}
+              {bedsTagRenderer()}
+              {clearaFiltersRenderer()}
+            </Flex>
           </Flex>
         </Flex>
 
-        <Flex align="center" gap={8}>
-          {regionTagRenderer()}
-          {priceTagRenderer()}
-          {areaTagRenderer()}
-          {bedsTagRenderer()}
-          {clearaFiltersRenderer()}
+        <Flex align="center" gap={16}>
+          <ButtonPrimary>
+            <Flex align="center" gap={2}>
+              <PlusIcon />
+              <span className="btnText">ლისტინგის დამატება</span>
+            </Flex>
+          </ButtonPrimary>
+
+          <ButtonSecondary>
+            <Flex align="center" gap={2}>
+              <PlusIconColored />
+              <span className="btnText">აგენტის დამატება</span>
+            </Flex>
+          </ButtonSecondary>
         </Flex>
+      </Flex>
+
+      <Flex gap={20} wrap className={classes.estates}>
+        {dataRenderer()}
       </Flex>
     </Flex>
   );

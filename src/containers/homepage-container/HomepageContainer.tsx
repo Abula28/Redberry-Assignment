@@ -2,12 +2,14 @@ import { GetRealEstatesRes, GetRegionsRes } from "@/api/responses";
 import { getRealEstates, getRegions } from "@/api/services";
 import HomepageComponent from "@/components/homepage-components/HomepageComponent";
 import { HompageComponentProps } from "@/types/component-types/homepageComponentProps";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const HomepageContainer = () => {
   const [estatesData, setEstatesData] = useState<GetRealEstatesRes[]>();
   const [regionsData, setRegionsData] = useState<GetRegionsRes[]>();
   const [activeBtn, setActiveBtn] = useState<number>();
+  const activeBtnRef = useRef<HTMLButtonElement>(null);
+
   const [selectedRegions, setSelectedRegions] = useState<string[]>(() => {
     const savedRegions = localStorage.getItem("selectedRegions");
     return savedRegions ? JSON.parse(savedRegions) : [];
@@ -43,6 +45,19 @@ const HomepageContainer = () => {
 
   useEffect(() => {
     getData();
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (!activeBtnRef.current?.contains(e.target as Node)) {
+        setActiveBtn(undefined);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
   }, []);
 
   const handleActiveDropdown = (i: number) => {
@@ -124,8 +139,39 @@ const HomepageContainer = () => {
 
   if (!estatesData || !regionsData) return <p>Loading...</p>;
 
+  const filteredData = () => {
+    let data = estatesData;
+    if (selectedRegions.length > 0) {
+      data = data.filter((item) =>
+        selectedRegions.includes(item.city.region.name)
+      );
+    }
+    if (priceFrom && !priceTo) {
+      data = data.filter((item) => item.price >= priceFrom);
+    }
+    if (priceFrom && priceTo) {
+      data = data.filter(
+        (item) => item.price >= priceFrom && item.price <= priceTo
+      );
+    }
+
+    if (areaFrom && !areaTo) {
+      data = data.filter((item) => item.area >= areaFrom);
+    }
+
+    if (areaFrom && areaTo) {
+      data = data.filter(
+        (item) => item.area >= areaFrom && item.area <= areaTo
+      );
+    }
+    if (bedsValue) {
+      data = data.filter((item) => item.bedrooms === bedsValue);
+    }
+
+    return data;
+  };
+
   const props: HompageComponentProps = {
-    estatesData,
     regionsData,
     activeBtn,
     selectedRegions,
@@ -134,6 +180,8 @@ const HomepageContainer = () => {
     areaFrom,
     areaTo,
     bedsValue,
+    activeBtnRef,
+    filteredData,
     handleActiveDropdown,
     handleSelectRegion,
     handlePriceConfirm,

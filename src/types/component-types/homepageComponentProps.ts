@@ -1,7 +1,6 @@
 import { GetRealEstatesRes, GetRegionsRes } from "@/api/responses";
 
 export type HompageComponentProps = {
-  estatesData: GetRealEstatesRes[];
   regionsData: GetRegionsRes[];
   activeBtn: number | undefined;
   selectedRegions: string[];
@@ -10,6 +9,9 @@ export type HompageComponentProps = {
   areaFrom: number | undefined;
   areaTo: number | undefined;
   bedsValue: number | undefined;
+  activeBtnRef: React.RefObject<HTMLButtonElement>;
+
+  filteredData: () => GetRealEstatesRes[];
 
   handleSelectRegion: (e: string[]) => void;
   handleActiveDropdown: (e: number) => void;
@@ -51,3 +53,5 @@ export type BedsDropdownProps = {
   handleBedsConfirm: (beds: number | undefined) => void;
   bedsValue: number | undefined;
 };
+
+export interface EstateCardProps extends GetRealEstatesRes {}

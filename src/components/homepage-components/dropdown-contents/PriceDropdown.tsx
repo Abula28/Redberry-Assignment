@@ -4,6 +4,7 @@ import { PriceDropdownProps } from "@/types/component-types/homepageComponentPro
 import { areaData, pricesData } from "@/assets/data/home";
 import CustomInput from "@/components/common/antd-components/CustomInput";
 import { useState } from "react";
+import { ButtonPrimary } from "@/components/common/antd-components";
 
 const PriceDropdown: React.FC<PriceDropdownProps> = ({
   handlePriceConfirm,
@@ -69,7 +70,7 @@ const PriceDropdown: React.FC<PriceDropdownProps> = ({
 
             {inputStatusRenderer() === "error" && (
               <span className={classes.errorMessage}>
-                ჩაწერეთ ვალიდური მონაცემები
+                გთხოვთ შეიყვანოთ ვალიდური რიცხვები
               </span>
             )}
 
@@ -128,9 +129,9 @@ const PriceDropdown: React.FC<PriceDropdownProps> = ({
       </Flex>
 
       <Flex justify="flex-end" style={{ width: "100%" }}>
-        <button className={classes.confirmBtn} onClick={handleConfirm}>
-          არჩევა
-        </button>
+        <ButtonPrimary size="small" onClick={handleConfirm}>
+          <span className={"btnText"}>არჩევა</span>
+        </ButtonPrimary>
       </Flex>
     </Flex>
   );

@@ -2,7 +2,6 @@
   margin: 77px auto;
   max-width: 1596px;
   width: 100%;
-  border: 2px solid red;
 }
 
 .filterDropdowns {
@@ -56,4 +55,11 @@
   line-height: 16.8px;
   font-weight: 400;
   color: #021526cc;
+}
+
+.notFound {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  color: rgba(2, 21, 38, 0.8);
 }

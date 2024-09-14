@@ -3,6 +3,7 @@ import classes from "./BedsDropdown.module.scss";
 import { Flex } from "antd";
 import CustomInput from "@/components/common/antd-components/CustomInput";
 import { BedsDropdownProps } from "@/types/component-types/homepageComponentProps";
+import { ButtonPrimary } from "@/components/common/antd-components";
 
 const BedsDropdown: React.FC<BedsDropdownProps> = ({
   handleBedsConfirm,
@@ -28,9 +29,9 @@ const BedsDropdown: React.FC<BedsDropdownProps> = ({
         />
       </Flex>
       <Flex justify="flex-end" style={{ width: "100%" }}>
-        <button className={classes.confirmBtn} onClick={handleConfirm}>
-          არჩევა
-        </button>
+        <ButtonPrimary size="small" onClick={handleConfirm}>
+          <span className={"btnText"}>არჩევა</span>
+        </ButtonPrimary>
       </Flex>
     </Flex>
   );

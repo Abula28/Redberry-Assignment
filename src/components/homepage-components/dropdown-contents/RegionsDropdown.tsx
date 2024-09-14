@@ -3,6 +3,7 @@ import classes from "./RegionsDropdown.module.scss";
 import CustomChechbox from "@/components/common/antd-components/CustomChechbox";
 import { RegionsDropdownProps } from "@/types/component-types/homepageComponentProps";
 import { useState } from "react";
+import { ButtonPrimary } from "@/components/common/antd-components";
 
 const RegionsDropdown: React.FC<RegionsDropdownProps> = ({
   data,
@@ -47,12 +48,10 @@ const RegionsDropdown: React.FC<RegionsDropdownProps> = ({
           </div>
         </Flex>
 
-        <Flex
-          justify="flex-end"
-          style={{ width: "100%" }}
-          onClick={handleConfirm}
-        >
-          <button className={classes.confirmBtn}>არჩევა</button>
+        <Flex justify="flex-end" style={{ width: "100%" }}>
+          <ButtonPrimary size="small" onClick={handleConfirm}>
+            <span className={"btnText"}>არჩევა</span>
+          </ButtonPrimary>
         </Flex>
       </Flex>
     </Flex>
