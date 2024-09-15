@@ -6,7 +6,11 @@ import { GetAgentsRes, GetRealEstatesRes } from "../responses";
 export const postAgents = async (
   data: PostAgentsReq
 ): Promise<GetAgentsRes> => {
-  const response = await getAxiosClient().post(agentsEnpoint(), data);
+  const response = await getAxiosClient().post(agentsEnpoint(), data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   const result = await response.data;
 
   return result;

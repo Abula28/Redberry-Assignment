@@ -10,7 +10,7 @@ export type HompageComponentProps = {
   areaTo: number | undefined;
   bedsValue: number | undefined;
   activeBtnRef: React.RefObject<HTMLButtonElement>;
-
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   filteredData: () => GetRealEstatesRes[];
 
   handleSelectRegion: (e: string[]) => void;
@@ -26,7 +26,7 @@ export type HompageComponentProps = {
   handleRemoveareaRange: () => void;
   handleRemoveBeds: () => void;
   clearAllFilters: () => void;
-};
+} & AgentModalProps;
 
 export type RegionsDropdownProps = {
   data: GetRegionsRes[];
@@ -55,3 +55,25 @@ export type BedsDropdownProps = {
 };
 
 export interface EstateCardProps extends GetRealEstatesRes {}
+
+export type AgentModalProps = {
+  open: boolean;
+  onClose: () => void;
+  onOk: () => void;
+  agentValues: AgentValuesT;
+  imgValue: File | null;
+  nameError: boolean;
+  surnameError: boolean;
+  emailError: boolean;
+  phoneError: boolean;
+  imageError: boolean;
+  handleIputsChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleImgChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export type AgentValuesT = {
+  name: string;
+  surname: string;
+  email: string;
+  phone: string;
+};

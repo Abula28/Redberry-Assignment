@@ -1,14 +1,20 @@
+import { PostAgentsReq } from "@/api";
 import { GetRealEstatesRes, GetRegionsRes } from "@/api/responses";
-import { getRealEstates, getRegions } from "@/api/services";
+import { getRealEstates, getRegions, postAgents } from "@/api/services";
 import HomepageComponent from "@/components/homepage-components/HomepageComponent";
-import { HompageComponentProps } from "@/types/component-types/homepageComponentProps";
-import { useState, useEffect, useRef } from "react";
+import { imgToBinary } from "@/lib";
+import {
+  AgentValuesT,
+  HompageComponentProps,
+} from "@/types/component-types/homepageComponentProps";
+import { debounce } from "lodash";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 const HomepageContainer = () => {
+  // ========== States and Refs ========== //
   const [estatesData, setEstatesData] = useState<GetRealEstatesRes[]>();
   const [regionsData, setRegionsData] = useState<GetRegionsRes[]>();
   const [activeBtn, setActiveBtn] = useState<number>();
-  const activeBtnRef = useRef<HTMLButtonElement>(null);
 
   const [selectedRegions, setSelectedRegions] = useState<string[]>(() => {
     const savedRegions = localStorage.getItem("selectedRegions");
@@ -35,6 +41,25 @@ const HomepageContainer = () => {
     return savedBedsValue ? Number(savedBedsValue) : undefined;
   });
 
+  const activeBtnRef = useRef<HTMLButtonElement>(null);
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [agentValues, setAgentValues] = useState<AgentValuesT>({
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+  });
+  const [imgValue, setImgValue] = useState<File | null>(null);
+
+  const [nameError, setNameError] = useState<boolean>(false);
+  const [surnameError, setSurnameError] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<boolean>(false);
+  const [phoneError, setPhoneError] = useState<boolean>(false);
+  const [imageError, setImageError] = useState<boolean>(false);
+
+  // ========== Backend Logics ========== //
+
   const getData = async () => {
     const realEstates = await getRealEstates();
     const regions = await getRegions();
@@ -42,6 +67,16 @@ const HomepageContainer = () => {
     setEstatesData(realEstates);
     setRegionsData(regions);
   };
+
+  const createAgents = async (data: PostAgentsReq) => {
+    try {
+      await postAgents(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // ========== useEffects useCallbacks ========== //
 
   useEffect(() => {
     getData();
@@ -59,6 +94,28 @@ const HomepageContainer = () => {
       document.removeEventListener("mousedown", handler);
     };
   }, []);
+
+  useEffect(() => {
+    const savedValues = localStorage.getItem("agentValues");
+    const savedImg = localStorage.getItem("imgValue");
+
+    if (savedValues) {
+      setAgentValues(JSON.parse(savedValues));
+    }
+
+    if (savedImg) {
+      setImgValue(JSON.parse(savedImg));
+    }
+  }, []);
+
+  const saveToLocalStorage = useCallback(
+    debounce((updatedValues: AgentValuesT) => {
+      localStorage.setItem("agentValues", JSON.stringify(updatedValues));
+    }, 500),
+    []
+  );
+
+  // ========== Handlers ========== //
 
   const handleActiveDropdown = (i: number) => {
     setActiveBtn((prev) => {
@@ -171,6 +228,106 @@ const HomepageContainer = () => {
     return data;
   };
 
+  const handleIputsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setAgentValues((prev) => {
+      const updatedValues = { ...prev, [name]: value };
+
+      saveToLocalStorage(updatedValues);
+
+      return updatedValues;
+    });
+  };
+
+  const errorHandler = () => {
+    let hasError = false;
+    if (agentValues.name.trim().length < 2) {
+      setNameError(true);
+      hasError = true;
+    } else {
+      setNameError(false);
+    }
+
+    if (agentValues.surname.trim().length < 2) {
+      setSurnameError(true);
+      hasError = true;
+    } else {
+      setSurnameError(false);
+    }
+
+    if (!agentValues.email.endsWith("@redberry.ge")) {
+      setEmailError(true);
+      hasError = true;
+    } else {
+      setEmailError(false);
+    }
+
+    if (
+      !/^\d+$/.test(agentValues.phone) ||
+      agentValues.phone.split("")[0] !== "5" ||
+      agentValues.phone.length < 9 ||
+      agentValues.phone.length > 9
+    ) {
+      setPhoneError(true);
+      hasError = true;
+    } else {
+      setPhoneError(false);
+    }
+
+    if (!imgValue) {
+      setImageError(true);
+      hasError = true;
+    } else {
+      setImageError(false);
+    }
+
+    return hasError;
+  };
+
+  const handleImgChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setImgValue(e.target.files[0]);
+      setImageError(false);
+    }
+  };
+
+  const clearAgentsData = () => {
+    setImgValue(null);
+    setAgentValues({
+      name: "",
+      surname: "",
+      email: "",
+      phone: "",
+    });
+    setNameError(false);
+    setSurnameError(false);
+    setEmailError(false);
+    setPhoneError(false);
+    setImageError(false);
+    setOpen(false);
+    localStorage.removeItem("agentValues");
+    localStorage.removeItem("imgValue");
+  };
+
+  const handleSubmit = async () => {
+    const hasError = errorHandler();
+
+    if (hasError || !imgValue) {
+      return;
+    }
+
+    const data: PostAgentsReq = {
+      ...agentValues,
+      avatar: imgValue,
+    };
+    createAgents(data);
+    clearAgentsData();
+  };
+
+  const handleCancel = () => {
+    clearAgentsData();
+  };
+
   const props: HompageComponentProps = {
     regionsData,
     activeBtn,
@@ -181,6 +338,19 @@ const HomepageContainer = () => {
     areaTo,
     bedsValue,
     activeBtnRef,
+    open,
+    agentValues,
+    imgValue,
+    nameError,
+    surnameError,
+    emailError,
+    phoneError,
+    imageError,
+    setOpen,
+    handleIputsChange,
+    handleImgChange,
+    onOk: handleSubmit,
+    onClose: handleCancel,
     filteredData,
     handleActiveDropdown,
     handleSelectRegion,
