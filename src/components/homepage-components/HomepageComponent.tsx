@@ -21,7 +21,7 @@ const HomepageComponent: React.FC<HompageComponentProps> = ({
   areaFrom,
   areaTo,
   bedsValue,
-  activeBtnRef,
+  activeDropdownRef,
   open,
   agentValues,
   imgValue,
@@ -264,7 +264,6 @@ const HomepageComponent: React.FC<HompageComponentProps> = ({
                           activeBtn === i && classes.active
                         }`}
                         onClick={() => handleActiveDropdown(i)}
-                        ref={activeBtnRef}
                       >
                         <Flex align="center" gap={4}>
                           {name}{" "}
@@ -276,7 +275,12 @@ const HomepageComponent: React.FC<HompageComponentProps> = ({
                         </Flex>
                       </button>
                       {activeBtn === i && (
-                        <div className={classes.dropdownContent}>{label}</div>
+                        <div
+                          className={classes.dropdownContent}
+                          ref={activeDropdownRef}
+                        >
+                          {label}
+                        </div>
                       )}
                     </div>
                   ))}

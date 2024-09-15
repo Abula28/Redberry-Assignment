@@ -9,7 +9,7 @@ export type HompageComponentProps = {
   areaFrom: number | undefined;
   areaTo: number | undefined;
   bedsValue: number | undefined;
-  activeBtnRef: React.RefObject<HTMLButtonElement>;
+  activeDropdownRef: React.RefObject<HTMLDivElement>;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   filteredData: () => GetRealEstatesRes[];
 

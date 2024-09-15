@@ -41,7 +41,7 @@ const HomepageContainer = () => {
     return savedBedsValue ? Number(savedBedsValue) : undefined;
   });
 
-  const activeBtnRef = useRef<HTMLButtonElement>(null);
+  const activeDropdownRef = useRef<HTMLDivElement>(null);
 
   const [open, setOpen] = useState<boolean>(false);
   const [agentValues, setAgentValues] = useState<AgentValuesT>({
@@ -84,7 +84,7 @@ const HomepageContainer = () => {
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (!activeBtnRef.current?.contains(e.target as Node)) {
+      if (!activeDropdownRef.current?.contains(e.target as Node)) {
         setActiveBtn(undefined);
       }
     };
@@ -337,7 +337,7 @@ const HomepageContainer = () => {
     areaFrom,
     areaTo,
     bedsValue,
-    activeBtnRef,
+    activeDropdownRef,
     open,
     agentValues,
     imgValue,
