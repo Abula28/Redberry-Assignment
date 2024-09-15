@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage";
 import Layout from "./layout/Layout";
 import EstatePage from "./pages/EstatePage";
 import React, { useEffect } from "react";
+import AddListingPage from "./pages/AddListingPage";
 
 function App() {
   useEffect(() => {
@@ -38,6 +39,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/estate/:id" element={<EstatePage />} />
+          <Route path="/add-listing" element={<AddListingPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>

@@ -38,14 +38,14 @@ const AgentModal: React.FC<AgentModalProps> = ({
           align="center"
           vertical
           gap={61}
-          style={{ width: "100%" }}
+          className={`w-full`}
         >
           <h2 className={classes.header}>აგენტის დამატება</h2>
 
-          <Flex vertical gap={91} style={{ width: "100%" }}>
-            <Flex vertical gap={28} style={{ width: "100%" }}>
-              <Flex gap={31} style={{ width: "100%" }}>
-                <Flex vertical gap={5} style={{ width: "100%" }}>
+          <Flex vertical gap={91} className={`w-full`}>
+            <Flex vertical gap={28} className={`w-full`}>
+              <Flex gap={31} className={`w-full`}>
+                <Flex vertical gap={5} className={`w-full`}>
                   <label>სახელი*</label>
                   <CustomInput
                     className={classes.input}
@@ -66,7 +66,7 @@ const AgentModal: React.FC<AgentModalProps> = ({
                   </p>
                 </Flex>
 
-                <Flex vertical gap={5} style={{ width: "100%" }}>
+                <Flex vertical gap={5} className={`w-full`}>
                   <label>გვარი*</label>
                   <CustomInput
                     className={classes.input}
@@ -89,8 +89,8 @@ const AgentModal: React.FC<AgentModalProps> = ({
                 </Flex>
               </Flex>
 
-              <Flex gap={31} style={{ width: "100%" }}>
-                <Flex vertical gap={5} style={{ width: "100%" }}>
+              <Flex gap={31} className={`w-full`}>
+                <Flex vertical gap={5} className={`w-full`}>
                   <label>ელ-ფოსტა*</label>
                   <CustomInput
                     className={classes.input}
@@ -113,7 +113,7 @@ const AgentModal: React.FC<AgentModalProps> = ({
                   </p>
                 </Flex>
 
-                <Flex vertical gap={5} style={{ width: "100%" }}>
+                <Flex vertical gap={5} className={`w-full`}>
                   <label>ტელეფონის ნომერი*</label>
                   <CustomInput
                     className={classes.input}
@@ -192,7 +192,7 @@ const AgentModal: React.FC<AgentModalProps> = ({
               </Flex>
             </Flex>
 
-            <Flex style={{ width: "100%" }} justify="flex-end">
+            <Flex className={`w-full`} justify="flex-end">
               <Flex align="center" gap={15}>
                 <ButtonSecondary onClick={onClose}>
                   <span className="btnText">გაუქმება</span>

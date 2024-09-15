@@ -10,6 +10,7 @@ import { ButtonPrimary, ButtonSecondary } from "../common/antd-components";
 import { PlusIcon, PlusIconColored } from "@/assets";
 import EstateCard from "./estate-card/EstateCard";
 import AgentModal from "./agent-modal/AgentModal";
+import { Link } from "react-router-dom";
 
 const HomepageComponent: React.FC<HompageComponentProps> = ({
   regionsData,
@@ -294,10 +295,12 @@ const HomepageComponent: React.FC<HompageComponentProps> = ({
 
           <Flex align="center" gap={16}>
             <ButtonPrimary>
-              <Flex align="center" gap={2}>
-                <PlusIcon />
-                <span className="btnText">ლისტინგის დამატება</span>
-              </Flex>
+              <Link to={"/add-listing"}>
+                <Flex align="center" gap={2}>
+                  <PlusIcon />
+                  <span className="btnText">ლისტინგის დამატება</span>
+                </Flex>
+              </Link>
             </ButtonPrimary>
 
             <ButtonSecondary onClick={() => setOpen(true)}>

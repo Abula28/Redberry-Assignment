@@ -22,7 +22,7 @@ const RegionsDropdown: React.FC<RegionsDropdownProps> = ({
   return (
     <Flex vertical gap={32} className={classes.dropdown}>
       <Flex vertical gap={32}>
-        <Flex vertical gap={24} style={{ width: "100%" }}>
+        <Flex vertical gap={24} className={`w-full`}>
           <h2>რეგიონის მიხედვით</h2>
 
           <div className={classes.regionsList}>
@@ -48,7 +48,7 @@ const RegionsDropdown: React.FC<RegionsDropdownProps> = ({
           </div>
         </Flex>
 
-        <Flex justify="flex-end" style={{ width: "100%" }}>
+        <Flex justify="flex-end" className={`w-full`}>
           <ButtonPrimary size="small" onClick={handleConfirm}>
             <span className={"btnText"}>არჩევა</span>
           </ButtonPrimary>

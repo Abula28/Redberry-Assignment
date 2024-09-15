@@ -15,7 +15,7 @@ const BedsDropdown: React.FC<BedsDropdownProps> = ({
   };
   return (
     <Flex className={classes.dropdown} vertical gap={32}>
-      <Flex vertical gap={24} style={{ width: "100%" }}>
+      <Flex vertical gap={24} className={`w-full`}>
         <h2>საძინებლების რაოდენობა</h2>
 
         <CustomInput
@@ -28,7 +28,7 @@ const BedsDropdown: React.FC<BedsDropdownProps> = ({
           className={classes.inpWidth}
         />
       </Flex>
-      <Flex justify="flex-end" style={{ width: "100%" }}>
+      <Flex justify="flex-end" className={`w-full`}>
         <ButtonPrimary size="small" onClick={handleConfirm}>
           <span className={"btnText"}>არჩევა</span>
         </ButtonPrimary>

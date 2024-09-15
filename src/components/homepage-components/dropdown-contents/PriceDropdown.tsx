@@ -128,7 +128,7 @@ const PriceDropdown: React.FC<PriceDropdownProps> = ({
         </Flex>
       </Flex>
 
-      <Flex justify="flex-end" style={{ width: "100%" }}>
+      <Flex justify="flex-end" className={`w-full`}>
         <ButtonPrimary size="small" onClick={handleConfirm}>
           <span className={"btnText"}>არჩევა</span>
         </ButtonPrimary>
