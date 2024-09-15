@@ -8,6 +8,7 @@ import {
 import {
   GetAgentsRes,
   GetCitiesRes,
+  GetEstateRes,
   GetRealEstatesRes,
   GetRegionsRes,
 } from "../responses";
@@ -28,7 +29,7 @@ export const getRealEstates = async (): Promise<GetRealEstatesRes[]> => {
   return result;
 };
 
-export const getRealEstateById = async (id: number): Promise<GetAgentsRes> => {
+export const getRealEstateById = async (id: string): Promise<GetEstateRes> => {
   const response = await getAxiosClient().get(realEstatesEndpoint(id));
   const result = await response.data;
 

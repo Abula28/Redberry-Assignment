@@ -21,9 +21,9 @@ const EstateCard: React.FC<EstateCardProps> = ({
 }) => {
   return (
     <div className={classes.estateCard}>
-      <Link to={`/estates/${id}`}>
-        <RentTag bordered={false} className={classes.rentTag}>
-          <span className={classes.rentTagText}>
+      <Link to={`/estate/${id}`}>
+        <RentTag bordered={false} className={`"rentTag" ${classes.tag}`}>
+          <span className={"rentTagText"}>
             {is_rental ? "ქირავდება" : "იყიდება"}
           </span>
         </RentTag>

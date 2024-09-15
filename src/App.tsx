@@ -1,13 +1,15 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import Layout from "./layout/Layout";
-import { useEffect } from "react";
+import EstatePage from "./pages/EstatePage";
+import React, { useEffect } from "react";
 
 function App() {
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
-      if ((document.activeElement as HTMLInputElement)?.type === "number") {
+      const activeElement = document.activeElement as HTMLInputElement;
+      if (activeElement?.type === "number") {
         event.preventDefault();
       }
     };
@@ -19,11 +21,23 @@ function App() {
     };
   }, []);
 
+  const ScrollToTop: React.FC = () => {
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+
+    return null;
+  };
+
   return (
     <BrowserRouter>
       <Layout>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/estate/:id" element={<EstatePage />} />
         </Routes>
       </Layout>
     </BrowserRouter>

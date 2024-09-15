@@ -1,0 +1,114 @@
+.section {
+  max-width: 1591px;
+  width: 100%;
+  margin: 64px auto;
+}
+
+.imgSide {
+  max-width: 839px;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+
+  .tag {
+    position: absolute;
+    top: 41px;
+    left: 41px;
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
+.infoSide {
+  max-width: 503px;
+  width: 100%;
+  padding-top: 30px;
+  h2 {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 57.6px;
+    color: #021526;
+  }
+
+  .estateInfo {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28.8px;
+    color: #808a93;
+  }
+
+  .description {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    color: #808a93;
+  }
+}
+
+.agentCard {
+  width: 100%;
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  padding: 24px 20px;
+
+  img {
+    border-radius: 50%;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    color: #021526;
+  }
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    color: #676e76;
+  }
+}
+
+.btn {
+  max-width: 131px;
+  border: 1px solid #676e76;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.4px;
+  color: #676e76;
+  border-radius: 8px;
+
+  &:hover {
+    border: 1px solid #676e76 !important;
+    color: #676e76 !important;
+  }
+}
+
+.swiperHeadText {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38.4px;
+  color: #021526;
+}
+
+.swiperContainer {
+  width: 100%;
+  position: relative;
+  .swipeLeft {
+    position: absolute;
+    top: 50%;
+    left: -50px;
+    cursor: pointer;
+  }
+
+  .swipeRight {
+    position: absolute;
+    top: 50%;
+    right: -50px;
+    cursor: pointer;
+  }
+}

@@ -21,6 +21,10 @@ export type GetRealEstatesRes = {
   city: GetCitiesRes;
 };
 
+export type GetEstateRes = {
+  agent: GetAgentsRes;
+} & GetRealEstatesRes;
+
 export type GetCitiesRes = {
   id: number;
   name: string;

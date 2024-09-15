@@ -4,7 +4,7 @@ export const agentsEnpoint = () => {
 };
 
 // ========== Real Estates ========== //
-export const realEstatesEndpoint = (id?: number) => {
+export const realEstatesEndpoint = (id?: string) => {
   return `real-estates${id ? `/${id}` : ""}`;
 };
 

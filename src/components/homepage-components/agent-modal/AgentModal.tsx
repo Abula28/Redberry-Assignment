@@ -28,9 +28,9 @@ const AgentModal: React.FC<AgentModalProps> = ({
       open={open}
       centered
       footer={null}
-      closable={false}
       className={classes.agentModal}
       width={1009}
+      onCancel={onClose}
     >
       <Flex justify="center" align="center">
         <Flex

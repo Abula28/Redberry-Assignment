@@ -1,8 +1,8 @@
 import { PostAgentsReq } from "@/api";
 import { GetRealEstatesRes, GetRegionsRes } from "@/api/responses";
 import { getRealEstates, getRegions, postAgents } from "@/api/services";
+import Loading from "@/components/common/Loading";
 import HomepageComponent from "@/components/homepage-components/HomepageComponent";
-import { imgToBinary } from "@/lib";
 import {
   AgentValuesT,
   HompageComponentProps,
@@ -194,7 +194,7 @@ const HomepageContainer = () => {
     localStorage.clear();
   };
 
-  if (!estatesData || !regionsData) return <p>Loading...</p>;
+  if (!estatesData || !regionsData) return <Loading />;
 
   const filteredData = () => {
     let data = estatesData;

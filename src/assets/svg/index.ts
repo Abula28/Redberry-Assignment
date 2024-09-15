@@ -6,6 +6,11 @@ import BedIcon from "./bed-icon.svg";
 import MarkIcon from "./mark-icon.svg";
 import CheckMarkIcon from "./checkmark-icon.svg";
 import PlusIconCircle from "./plus-circle-icon.svg";
+import ArrowLeftIcon32 from "./left-arrow-icon-32.svg";
+import ArrowLeftIcon30 from "./left-arrow-icon-30.svg";
+import ArrowRightIcon30 from "./right-arrow-icon-30.svg";
+import MailIcon from "./mail-icon.svg";
+import PhoneIcon from "./phone-icon.svg";
 
 export {
   PlusIcon,
@@ -16,4 +21,9 @@ export {
   MarkIcon,
   CheckMarkIcon,
   PlusIconCircle,
+  ArrowLeftIcon32,
+  ArrowLeftIcon30,
+  ArrowRightIcon30,
+  MailIcon,
+  PhoneIcon,
 };
