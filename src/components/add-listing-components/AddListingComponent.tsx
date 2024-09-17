@@ -1,13 +1,58 @@
 import { Flex } from "antd";
 import classes from "./AddListingComponent.module.scss";
 import { Radio } from "../common/custom-components/Radio";
-import { useState } from "react";
+import { AddListingComponentProps } from "@/types";
+import AddresDetails from "./address-details/AddresDetails";
+import HouseDetails from "./hose-details/HouseDetails";
 
-const AddListingComponent = () => {
-  const [radioValue, setRadioValue] = useState<1 | 0>(0);
+const AddListingComponent: React.FC<AddListingComponentProps> = ({
+  radioValue,
+  selectValue,
+  regionsData,
+  selectedRegion,
+  selectedCity,
+  citiesData,
+  addressValue,
+  houseValues,
+  description,
 
-  const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRadioValue(Number(e.target.value) as 1 | 0);
+  handleSelectRegion,
+  handleRadioChange,
+  handleSelectCity,
+  handleAddressChange,
+  handleHouseChange,
+  handleDescriptionChange,
+}) => {
+  const regionSelectData = regionsData.map((e) => ({
+    value: e.id.toString(),
+    label: e.name,
+  }));
+
+  const citySelectData = citiesData
+    .filter((e) => e.region_id.toString() === selectedRegion)
+    .map((e) => ({
+      value: e.id.toString(),
+      label: e.name,
+    }));
+
+  const addressDetailsProps = {
+    selectedRegion,
+    selectedCity,
+    regionSelectData,
+    citySelectData,
+    addressValue,
+    handleSelectRegion,
+    handleRadioChange,
+    handleSelectCity,
+    handleAddressChange,
+    handleDescriptionChange,
+  };
+
+  const houseDetailsProps = {
+    description,
+    houseValues,
+    handleHouseChange,
+    handleDescriptionChange,
   };
 
   return (
@@ -31,6 +76,10 @@ const AddListingComponent = () => {
             />
           </Flex>
         </Flex>
+
+        <AddresDetails {...addressDetailsProps} />
+
+        <HouseDetails {...houseDetailsProps} />
       </Flex>
     </Flex>
   );

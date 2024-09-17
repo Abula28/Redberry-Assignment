@@ -1,0 +1,55 @@
+.select_container {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #808a93;
+  height: 42px;
+  transition: all 0.5s;
+  overflow: hidden;
+  &.select_container_active {
+    height: 177px;
+  }
+
+  .icon {
+    &.active {
+      transform: rotate(180deg);
+    }
+  }
+
+  .select_button {
+    cursor: pointer;
+    padding: 12.5px 10px;
+
+    &.select_button_active {
+      border-bottom: 1px solid #808a93;
+    }
+
+    .select_button_text {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16.8px;
+      color: #021526;
+    }
+  }
+
+  .select_options {
+    opacity: 0;
+    transition: all 0.5s;
+    &.select_options_active {
+      opacity: 1;
+      overflow-y: auto;
+    }
+    .option {
+      border-bottom: 1px solid #808a93;
+      padding: 9px 10px;
+      cursor: pointer;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &.option_selected {
+        background: rgba(160, 166, 172, 0.11);
+      }
+    }
+  }
+}

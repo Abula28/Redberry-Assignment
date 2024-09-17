@@ -48,7 +48,13 @@ const EstatePageComponent: React.FC<EstateComponentProps> = ({
 
   return (
     <>
-      <DeleteModal open={open} onCancel={onCancel} onOk={onOk} closable />
+      <DeleteModal
+        centered
+        open={open}
+        onCancel={onCancel}
+        onOk={onOk}
+        closable
+      />
       <Flex vertical gap={53} className={classes.section}>
         <Flex vertical gap={29}>
           <div onClick={() => navigate(-1)} style={{ cursor: "pointer" }}>
@@ -109,7 +115,9 @@ const EstatePageComponent: React.FC<EstateComponentProps> = ({
                       />
 
                       <Flex vertical gap={4}>
-                        <h3>{agent.name}</h3>
+                        <h3>
+                          {agent.name} {agent.surname}
+                        </h3>
                         <p>აგენტი</p>
                       </Flex>
                     </Flex>

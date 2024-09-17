@@ -7,3 +7,5 @@ export type RadioProps = {
   className?: string;
   checked?: boolean;
 };
+
+export type SelectOptionsT = { label: React.ReactNode; value: string };

@@ -11,6 +11,7 @@ import ArrowLeftIcon30 from "./left-arrow-icon-30.svg";
 import ArrowRightIcon30 from "./right-arrow-icon-30.svg";
 import MailIcon from "./mail-icon.svg";
 import PhoneIcon from "./phone-icon.svg";
+import ChevronDownIcon from "./chevron-down-icon.svg";
 
 export {
   PlusIcon,
@@ -26,4 +27,5 @@ export {
   ArrowRightIcon30,
   MailIcon,
   PhoneIcon,
+  ChevronDownIcon,
 };

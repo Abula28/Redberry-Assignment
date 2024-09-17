@@ -17,3 +17,21 @@
     color: #1a1a1f;
   }
 }
+
+.inputContainer {
+  max-width: 384px;
+
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16.8px;
+    color: #021526;
+  }
+}
+
+.requiredText {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.8px;
+  color: #021526;
+}

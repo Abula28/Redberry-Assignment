@@ -11,7 +11,7 @@ const CustomInput: React.FC<InputProps> = (props) => {
   };
   return (
     <ConfigProvider theme={{ components: inputStyles }}>
-      <Input {...props} />
+      <Input {...props} style={{ height: "40px" }} />
     </ConfigProvider>
   );
 };

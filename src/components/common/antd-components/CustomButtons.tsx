@@ -5,7 +5,7 @@ const buttonStyles = {
   Button: {
     colorPrimary: "rgb(249,59,29)",
     colorPrimaryActive: "rgb(255,93,68)",
-    colorPrimaryHover: "rgb(255,93,68)",
+    colorPrimaryHover: "#DF3014",
     defaultBorderColor: "rgb(249,59,29)",
     defaultColor: "rgb(249,59,29)",
     contentFontSize: 16,
