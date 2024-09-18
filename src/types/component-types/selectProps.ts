@@ -9,4 +9,5 @@ export type SelectProps = {
   onChange?: (value: string) => void;
   options: SelectOptionsT[];
   value?: string;
+  optionRender?: React.ReactNode;
 };

@@ -56,12 +56,13 @@ const HouseDetails: React.FC<HouseDetailsT> = ({
           <p className={`${classes.requiredText} `}>&#x2713; მხოლოდ რიცხვები</p>
         </Flex>
 
-        <Flex className="w-full" vertical gap={5}>
+        <Flex className={`w-full`} vertical gap={5}>
           <label>საძინებლების რაოდენობა *</label>
           <TextArea
             name="price"
             value={description}
             onChange={handleDescriptionChange}
+            rows={10}
           />
           <p className={`${classes.requiredText} `}>
             &#x2713; მინიმუმ ხუთი სიტყვა

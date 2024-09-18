@@ -1,15 +1,17 @@
-import { GetCitiesRes, GetRegionsRes } from "@/api";
+import { GetAgentsRes, GetCitiesRes, GetRegionsRes } from "@/api";
 import { SelectOptionsT } from "../common-types";
 
 export type AddListingComponentProps = {
   radioValue: 1 | 0;
-  selectValue: string;
   regionsData: GetRegionsRes[];
   citiesData: GetCitiesRes[];
-
+  agentsData: GetAgentsRes[];
+  imageValue: File | null;
+  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleRadioChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 } & Omit<AddressDetailsT, "regionSelectData" | "citySelectData"> &
-  HouseDetailsT;
+  HouseDetailsT &
+  Omit<AgentDetailsProps, "agentsSelectData">;
 
 export type AddressDetailsT = {
   selectedRegion: string | undefined;
@@ -28,4 +30,35 @@ export type HouseDetailsT = {
   description: string;
   handleHouseChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleDescriptionChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+};
+
+export type AgentDetailsProps = {
+  agentsSelectData: SelectOptionsT[];
+
+  agentImageValue: File | null;
+  selectedAgent: string | undefined;
+  agentValues: {
+    name: string;
+    surname: string;
+    email: string;
+    phone: string;
+  };
+
+  modalErrors: {
+    nameError: boolean;
+    surnameError: boolean;
+    emailError: boolean;
+    phoneError: boolean;
+    imageError: boolean;
+  };
+  modalOpen: boolean;
+  selectOpen: boolean;
+
+  handleSelectOpen: (e: boolean) => void;
+  handleModalOpen: () => void;
+  handleAgentConfirm: () => void;
+  handleAgentImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleModalClose: () => void;
+  handleSelectAgent: (e: string) => void;
+  handleInputsChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };

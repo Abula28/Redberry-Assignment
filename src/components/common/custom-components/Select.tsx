@@ -13,6 +13,7 @@ const Select: React.FC<SelectProps> = ({
   onChange,
   options,
   value,
+  optionRender,
 }) => {
   const divRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(open ? open : false);
@@ -81,6 +82,7 @@ const Select: React.FC<SelectProps> = ({
           isOpen && classes.select_options_active
         } `}
       >
+        <div className={classes.option}>{optionRender}</div>
         {options.map((e, i) => (
           <div
             key={i}

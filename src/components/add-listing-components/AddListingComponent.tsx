@@ -1,13 +1,14 @@
 import { Flex } from "antd";
 import classes from "./AddListingComponent.module.scss";
 import { Radio } from "../common/custom-components/Radio";
-import { AddListingComponentProps } from "@/types";
+import { AddListingComponentProps, AgentDetailsProps } from "@/types";
 import AddresDetails from "./address-details/AddresDetails";
-import HouseDetails from "./hose-details/HouseDetails";
+import HouseDetails from "./house-details/HouseDetails";
+import { PlusIconCircle } from "@/assets";
+import AgentDetails from "./agent-details/AgentDetails";
 
 const AddListingComponent: React.FC<AddListingComponentProps> = ({
   radioValue,
-  selectValue,
   regionsData,
   selectedRegion,
   selectedCity,
@@ -15,13 +16,28 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
   addressValue,
   houseValues,
   description,
-
+  imageValue,
+  agentsData,
+  agentImageValue,
+  selectedAgent,
+  agentValues,
+  modalErrors,
+  modalOpen,
+  selectOpen,
   handleSelectRegion,
   handleRadioChange,
   handleSelectCity,
   handleAddressChange,
   handleHouseChange,
   handleDescriptionChange,
+  handleImageChange,
+  handleAgentImageChange,
+  handleSelectAgent,
+  handleInputsChange,
+  handleAgentConfirm,
+  handleModalClose,
+  handleModalOpen,
+  handleSelectOpen,
 }) => {
   const regionSelectData = regionsData.map((e) => ({
     value: e.id.toString(),
@@ -34,6 +50,11 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
       value: e.id.toString(),
       label: e.name,
     }));
+
+  const agentsSelectData = agentsData.map((e) => ({
+    value: e.id.toString(),
+    label: e.name,
+  }));
 
   const addressDetailsProps = {
     selectedRegion,
@@ -53,6 +74,23 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
     houseValues,
     handleHouseChange,
     handleDescriptionChange,
+  };
+
+  const agentDetailsProps: AgentDetailsProps = {
+    agentsSelectData,
+    agentImageValue,
+    selectedAgent,
+    agentValues,
+    modalErrors,
+    modalOpen,
+    selectOpen,
+    handleAgentImageChange,
+    handleSelectAgent,
+    handleInputsChange,
+    handleAgentConfirm,
+    handleModalClose,
+    handleModalOpen,
+    handleSelectOpen,
   };
 
   return (
@@ -80,6 +118,33 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
         <AddresDetails {...addressDetailsProps} />
 
         <HouseDetails {...houseDetailsProps} />
+
+        <Flex vertical gap={5}>
+          <label>ატვირთეთ ფოტო</label>
+          <div className={`${classes.photoInput} `}>
+            <Flex
+              justify="center"
+              align="center"
+              className={classes.inputWrapper}
+            >
+              <PlusIconCircle />
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+            </Flex>
+            {imageValue && (
+              <img
+                src={URL.createObjectURL(imageValue)}
+                alt="prev-img"
+                className={classes.prevImg}
+              />
+            )}
+          </div>
+        </Flex>
+
+        <AgentDetails {...agentDetailsProps} />
       </Flex>
     </Flex>
   );
