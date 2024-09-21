@@ -19,7 +19,11 @@ export const postAgents = async (
 export const postRealEstates = async (
   data: PostRealEstatesReq
 ): Promise<GetRealEstatesRes> => {
-  const response = await getAxiosClient().post(realEstatesEndpoint(), data);
+  const response = await getAxiosClient().post(realEstatesEndpoint(), data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   const result = await response.data;
 
   return result;

@@ -7,6 +7,7 @@ import {
   GetRegionsRes,
   postAgents,
   postRealEstates,
+  PostRealEstatesReq,
 } from "@/api";
 import AddListingComponent from "@/components/add-listing-components/AddListingComponent";
 import Loading from "@/components/common/Loading";
@@ -92,6 +93,31 @@ const AddListingContainer = () => {
 
   const { error, success, contextHolder } = useMessages();
 
+  const getData = async () => {
+    const [regData, cities, agents] = await Promise.all([
+      getRegions(),
+      getCities(),
+      getAgents(),
+    ]);
+    setRegionsData(regData);
+    setCitiesData(cities);
+    setAgentsData(agents);
+  };
+
+  const createListing = async (data: PostRealEstatesReq) => {
+    try {
+      await postRealEstates(data);
+      success("ლისტინგი წარმატებითთ დაემატა");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    } catch (err) {
+      console.log(err);
+      error("რაღაც შეცდომაა");
+    }
+  };
+
   useEffect(() => {
     getData();
   }, []);
@@ -115,17 +141,6 @@ const AddListingContainer = () => {
     selectedAgent,
     agentValues,
   ]);
-
-  const getData = async () => {
-    const [regData, cities, agents] = await Promise.all([
-      getRegions(),
-      getCities(),
-      getAgents(),
-    ]);
-    setRegionsData(regData);
-    setCitiesData(cities);
-    setAgentsData(agents);
-  };
 
   const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRadioValue(Number(e.target.value) as 1 | 0);
@@ -378,38 +393,26 @@ const AddListingContainer = () => {
   };
 
   const handleSelectOpen = (e: boolean) => setSelectOpen(e);
-  const handleSubmit = async () => {
-    try {
-      const hasError = errorHandler();
-      if (hasError || !imageValue) {
-        return;
-      }
 
-      const formData = new FormData();
-      formData.append("description", description);
-      formData.append("region_id", String(selectedRegion));
-      formData.append("agent_id", String(selectedAgent));
-      formData.append("image", imageValue);
-      formData.append("is_rental", String(radioValue));
-      formData.append("city_id", String(selectedCity));
-      formData.append("address", addressValue.address);
-      formData.append("zip_code", addressValue.zip_code);
-      formData.append("price", String(houseValues.price));
-      formData.append("area", String(houseValues.area));
-      formData.append("bedrooms", String(houseValues.bedrooms));
-
-      const data: any = formData;
-
-      await postRealEstates(data);
-      clearValues();
-
-      setTimeout(() => {
-        navigate("/");
-      }, 2000);
-      success("ლისტინგი წარმატებით დაემატა");
-    } catch (e) {
-      error("რაღაც შეცდომაა");
+  const handleSubmit = () => {
+    const hasError = errorHandler();
+    if (hasError || !imageValue) {
+      return;
     }
+
+    const data: PostRealEstatesReq = {
+      description,
+      region_id: Number(selectedRegion),
+      image: imageValue,
+      is_rental: radioValue,
+      city_id: Number(selectedCity),
+      agent_id: Number(selectedAgent),
+      ...addressValue,
+      ...houseValues,
+    };
+
+    createListing(data);
+    clearValues();
   };
 
   if (!regionsData || !citiesData || !agentsData) return <Loading />;
