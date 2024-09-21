@@ -173,7 +173,6 @@ const EstatePageComponent: React.FC<EstateComponentProps> = ({
             </div>
 
             <Swiper
-              navigation={true}
               modules={[Navigation]}
               slidesPerView={4}
               onInit={(ev) => {
