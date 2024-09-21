@@ -105,6 +105,7 @@ const HomepageComponent: React.FC<HompageComponentProps> = ({
           e.preventDefault();
           handleRemoveRegion(selectedRegions[0]);
         }}
+        onClick={() => handleRemoveRegion(selectedRegions[0])}
         closeIcon
         style={{ cursor: "pointer" }}
       >
@@ -114,76 +115,124 @@ const HomepageComponent: React.FC<HompageComponentProps> = ({
   };
 
   const priceTagRenderer = () => {
-    if (!priceFrom || !priceTo) return;
-    if (priceTo < priceFrom) return;
+    if (!priceFrom && !priceTo) return;
 
-    if (priceFrom && !priceTo)
+    if (priceFrom && !priceTo) {
       return (
         <FilterTag
           onClose={(e) => {
             e.preventDefault();
             handleRemovePricesRange();
           }}
+          onClick={handleRemovePricesRange}
           closeIcon
           style={{ cursor: "pointer" }}
         >
           <span className={classes.filterTagText}>
-            {priceFrom.toLocaleString()} {">"}
+            {priceFrom.toLocaleString()} ₾ {">"}
           </span>
         </FilterTag>
       );
+    }
 
-    return (
-      <FilterTag
-        onClose={(e) => {
-          e.preventDefault();
-          handleRemovePricesRange();
-        }}
-        closeIcon
-        style={{ cursor: "pointer" }}
-      >
-        <span className={classes.filterTagText}>
-          {priceFrom.toLocaleString()} ₾ - {priceTo.toLocaleString()} ₾
-        </span>
-      </FilterTag>
-    );
+    if (!priceFrom && priceTo) {
+      return (
+        <FilterTag
+          onClose={(e) => {
+            e.preventDefault();
+            handleRemovePricesRange();
+          }}
+          onClick={handleRemovePricesRange}
+          closeIcon
+          style={{ cursor: "pointer" }}
+        >
+          <span className={classes.filterTagText}>
+            {priceTo.toLocaleString()} ₾ მდე
+          </span>
+        </FilterTag>
+      );
+    }
+
+    if (priceFrom && priceTo && priceTo < priceFrom) return;
+
+    if (priceFrom && priceTo) {
+      return (
+        <FilterTag
+          onClose={(e) => {
+            e.preventDefault();
+            handleRemovePricesRange();
+          }}
+          onClick={handleRemovePricesRange}
+          closeIcon
+          style={{ cursor: "pointer" }}
+        >
+          <span className={classes.filterTagText}>
+            {priceFrom.toLocaleString()} ₾ - {priceTo.toLocaleString()} ₾
+          </span>
+        </FilterTag>
+      );
+    }
   };
 
   const areaTagRenderer = () => {
-    if (!areaFrom || !areaTo) return;
-    if (areaTo < areaFrom) return;
+    if (!areaFrom && !areaTo) return;
 
-    if (areaFrom && !areaTo)
+    if (areaFrom && !areaTo) {
       return (
         <FilterTag
           onClose={(e) => {
             e.preventDefault();
             handleRemoveareaRange();
           }}
+          onClick={handleRemoveareaRange}
           closeIcon
           style={{ cursor: "pointer" }}
         >
           <span className={classes.filterTagText}>
-            {areaFrom.toLocaleString()} {">"}
+            {areaFrom.toLocaleString()} მ&sup2; {">"}
           </span>
         </FilterTag>
       );
+    }
 
-    return (
-      <FilterTag
-        onClose={(e) => {
-          e.preventDefault();
-          handleRemovePricesRange();
-        }}
-        closeIcon
-        style={{ cursor: "pointer" }}
-      >
-        <span className={classes.filterTagText}>
-          {areaFrom.toLocaleString()} მ&sup2; - {areaTo.toLocaleString()}{" "}
-          მ&sup2;
-        </span>
-      </FilterTag>
-    );
+    if (!areaFrom && areaTo) {
+      return (
+        <FilterTag
+          onClose={(e) => {
+            e.preventDefault();
+            handleRemoveareaRange();
+          }}
+          onClick={handleRemoveareaRange}
+          closeIcon
+          style={{ cursor: "pointer" }}
+        >
+          <span className={classes.filterTagText}>
+            {areaTo.toLocaleString()} მ&sup2; მდე
+          </span>
+        </FilterTag>
+      );
+    }
+
+    if (areaFrom && areaTo && areaTo < areaFrom) return;
+
+    if (areaFrom && areaTo) {
+      return (
+        <FilterTag
+          onClose={(e) => {
+            e.preventDefault();
+            handleRemoveareaRange();
+          }}
+          onClick={handleRemoveareaRange}
+          closeIcon
+          style={{ cursor: "pointer" }}
+        >
+          <span className={classes.filterTagText}>
+            {areaFrom.toLocaleString()} მ&sup2; - {areaTo.toLocaleString()}{" "}
+            მ&sup2;
+          </span>
+        </FilterTag>
+      );
+    }
   };
 
   const bedsTagRenderer = () => {
