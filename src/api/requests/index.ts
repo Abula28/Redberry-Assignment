@@ -5,8 +5,9 @@ export interface PostAgentsReq extends Omit<GetAgentsRes, "id" | "avatar"> {
 }
 
 export interface PostRealEstatesReq
-  extends Omit<GetRealEstatesRes, "id" | "city" | "avatar"> {
+  extends Omit<GetRealEstatesRes, "id" | "city" | "image"> {
   description: string;
   region_id: number;
   agent_id: number;
+  image: File;
 }

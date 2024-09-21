@@ -9,6 +9,10 @@
     height: 177px;
   }
 
+  &.select_container_error {
+    border: 1px solid #f93b1d;
+  }
+
   .icon {
     &.active {
       transform: rotate(180deg);

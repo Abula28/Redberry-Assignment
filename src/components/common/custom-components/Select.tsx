@@ -14,6 +14,7 @@ const Select: React.FC<SelectProps> = ({
   options,
   value,
   optionRender,
+  error,
 }) => {
   const divRef = useRef<HTMLDivElement | null>(null);
   const [isOpen, setIsOpen] = useState<boolean>(open ? open : false);
@@ -58,7 +59,9 @@ const Select: React.FC<SelectProps> = ({
       vertical
       className={`${classes.select_container} ${
         isOpen && classes.select_container_active
-      } ${className ? className : ""}`}
+      } ${error && classes.select_container_error} ${
+        className ? className : ""
+      }`}
       ref={divRef}
     >
       <Flex
@@ -82,7 +85,7 @@ const Select: React.FC<SelectProps> = ({
           isOpen && classes.select_options_active
         } `}
       >
-        <div className={classes.option}>{optionRender}</div>
+        {optionRender && <div className={classes.option}>{optionRender}</div>}
         {options.map((e, i) => (
           <div
             key={i}

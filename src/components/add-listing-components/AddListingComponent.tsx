@@ -6,6 +6,8 @@ import AddresDetails from "./address-details/AddresDetails";
 import HouseDetails from "./house-details/HouseDetails";
 import { PlusIconCircle } from "@/assets";
 import AgentDetails from "./agent-details/AgentDetails";
+import { Link } from "react-router-dom";
+import { ButtonPrimary, ButtonSecondary } from "../common/antd-components";
 
 const AddListingComponent: React.FC<AddListingComponentProps> = ({
   radioValue,
@@ -24,6 +26,16 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
   modalErrors,
   modalOpen,
   selectOpen,
+  addressError,
+  zipCodeError,
+  regionError,
+  cityError,
+  priceError,
+  areaError,
+  bedroomsError,
+  descriptionError,
+  listingImageError,
+  agentError,
   handleSelectRegion,
   handleRadioChange,
   handleSelectCity,
@@ -38,6 +50,8 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
   handleModalClose,
   handleModalOpen,
   handleSelectOpen,
+  handleSubmit,
+  clearValues,
 }) => {
   const regionSelectData = regionsData.map((e) => ({
     value: e.id.toString(),
@@ -62,6 +76,10 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
     regionSelectData,
     citySelectData,
     addressValue,
+    addressError,
+    zipCodeError,
+    regionError,
+    cityError,
     handleSelectRegion,
     handleRadioChange,
     handleSelectCity,
@@ -72,6 +90,10 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
   const houseDetailsProps = {
     description,
     houseValues,
+    priceError,
+    areaError,
+    bedroomsError,
+    descriptionError,
     handleHouseChange,
     handleDescriptionChange,
   };
@@ -84,6 +106,7 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
     modalErrors,
     modalOpen,
     selectOpen,
+    agentError,
     handleAgentImageChange,
     handleSelectAgent,
     handleInputsChange,
@@ -121,7 +144,11 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
 
         <Flex vertical gap={5}>
           <label>ატვირთეთ ფოტო</label>
-          <div className={`${classes.photoInput} `}>
+          <div
+            className={`${classes.photoInput} ${
+              listingImageError && !imageValue && classes.error
+            } `}
+          >
             <Flex
               justify="center"
               align="center"
@@ -135,16 +162,32 @@ const AddListingComponent: React.FC<AddListingComponentProps> = ({
               />
             </Flex>
             {imageValue && (
-              <img
-                src={URL.createObjectURL(imageValue)}
-                alt="prev-img"
-                className={classes.prevImg}
-              />
+              <Flex className="w-full" justify="flex-end">
+                <img
+                  src={URL.createObjectURL(imageValue)}
+                  alt="prev-img"
+                  className={classes.prevImg}
+                />
+              </Flex>
             )}
           </div>
         </Flex>
 
         <AgentDetails {...agentDetailsProps} />
+
+        <Flex className={`w-full`} justify="flex-end">
+          <Flex align="center" gap={15}>
+            <Link to={"/"} onClick={clearValues}>
+              <ButtonSecondary>
+                <span className={classes.cancelText}>გაუქმება</span>
+              </ButtonSecondary>
+            </Link>
+
+            <ButtonPrimary onClick={handleSubmit}>
+              <span className={classes.addListing}>დაამატე ლისტინგი</span>
+            </ButtonPrimary>
+          </Flex>
+        </Flex>
       </Flex>
     </Flex>
   );

@@ -13,6 +13,8 @@ const AgentDetails: React.FC<AgentDetailsProps> = ({
   modalErrors,
   modalOpen,
   selectOpen,
+  agentError,
+  selectedAgent,
   handleAgentImageChange,
   handleSelectAgent,
   handleInputsChange,
@@ -38,6 +40,7 @@ const AgentDetails: React.FC<AgentDetailsProps> = ({
         handleImgChange={handleAgentImageChange}
       />
       <Flex vertical gap={15} className={`${classes.inputContainer} w-full`}>
+        <h2>აგენტი</h2>
         <Flex vertical gap={5}>
           <label>აირჩიე</label>
           <Select
@@ -49,8 +52,10 @@ const AgentDetails: React.FC<AgentDetailsProps> = ({
             }
             options={agentsSelectData}
             text={"აირჩიეთ აგენტი"}
+            value={selectedAgent}
             onChange={handleSelectAgent}
             handleOpen={handleSelectOpen}
+            error={agentError && !selectedAgent}
           />
         </Flex>
       </Flex>

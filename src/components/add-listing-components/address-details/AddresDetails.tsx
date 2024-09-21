@@ -11,6 +11,10 @@ const AddresDetails: React.FC<AddressDetailsT> = ({
   selectedRegion,
   selectedCity,
   addressValue,
+  addressError,
+  zipCodeError,
+  regionError,
+  cityError,
   handleSelectCity,
   handleSelectRegion,
   handleAddressChange,
@@ -29,7 +33,11 @@ const AddresDetails: React.FC<AddressDetailsT> = ({
               onChange={handleAddressChange}
               type="text"
             />
-            <p className={`${classes.requiredText} `}>
+            <p
+              className={`${classes.requiredText} ${
+                addressError && classes.error
+              } ${addressValue.address.trim().length >= 2 && classes.success} `}
+            >
               &#x2713; მინიმუმ ორი სიმბოლო
             </p>
           </Flex>
@@ -42,7 +50,11 @@ const AddresDetails: React.FC<AddressDetailsT> = ({
               onChange={handleAddressChange}
               type="number"
             />
-            <p className={`${classes.requiredText} `}>
+            <p
+              className={`${classes.requiredText} ${
+                zipCodeError && classes.error
+              } ${Number(addressValue.zip_code) > 0 && classes.success} `}
+            >
               &#x2713; მხოლოდ რიცხვები
             </p>
           </Flex>
@@ -56,6 +68,7 @@ const AddresDetails: React.FC<AddressDetailsT> = ({
               value={selectedRegion}
               onChange={handleSelectRegion}
               text={"აირჩიეთ რეგიონი"}
+              error={regionError && !selectedRegion}
             />
           </Flex>
 
@@ -71,6 +84,7 @@ const AddresDetails: React.FC<AddressDetailsT> = ({
                 value={selectedCity}
                 onChange={handleSelectCity}
                 options={citySelectData}
+                error={cityError && !selectedCity}
               />
             </Flex>
           )}

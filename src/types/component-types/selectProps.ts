@@ -10,4 +10,5 @@ export type SelectProps = {
   options: SelectOptionsT[];
   value?: string;
   optionRender?: React.ReactNode;
+  error?: boolean;
 };
