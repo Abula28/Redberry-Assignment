@@ -22,14 +22,4 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  css: {
-    preprocessorOptions: {
-      scss: false, // Disable SCSS preprocessor options
-    },
-  },
-  build: {
-    rollupOptions: {
-      external: [/\.scss$/], // Exclude SCSS files from being bundled
-    },
-  },
 });

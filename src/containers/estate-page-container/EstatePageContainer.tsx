@@ -35,7 +35,7 @@ const EstatePageContainer = () => {
   const deleteListing = async () => {
     if (estateData) {
       try {
-        await deleteRealEstate(estateData.id);
+        await deleteRealEstate(estateData.id.toString());
         success("ლისტინგი წარმატებით წაიშალა");
         setOpen(false);
         setTimeout(() => {
