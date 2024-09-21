@@ -347,14 +347,14 @@ const HomepageComponent: React.FC<HompageComponentProps> = ({
           </Flex>
 
           <Flex align="center" gap={16}>
-            <ButtonPrimary>
-              <Link to={"/add-listing"}>
+            <Link to={"/add-listing"}>
+              <ButtonPrimary>
                 <Flex align="center" gap={2}>
                   <PlusIcon />
                   <span className="btnText">ლისტინგის დამატება</span>
                 </Flex>
-              </Link>
-            </ButtonPrimary>
+              </ButtonPrimary>
+            </Link>
 
             <ButtonSecondary onClick={() => setOpen(true)}>
               <Flex align="center" gap={2}>
