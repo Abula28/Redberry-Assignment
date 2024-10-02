@@ -2,6 +2,9 @@
   max-width: 1591px;
   width: 100%;
   margin: 64px auto;
+  @media (max-width: 1600px){
+    padding-inline: 24px;
+  }
 }
 
 .imgSide {

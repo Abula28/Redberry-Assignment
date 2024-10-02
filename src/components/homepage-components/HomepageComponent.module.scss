@@ -2,6 +2,10 @@
   margin: 77px auto;
   max-width: 1596px;
   width: 100%;
+
+  @media (max-width: 1600px){
+    padding-inline: 24px;
+  }
 }
 
 .filterDropdowns {
